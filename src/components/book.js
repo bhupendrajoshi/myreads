@@ -16,11 +16,11 @@ class BookComponent extends Component {
 
         <div>{book.title}</div>
 
-        {book.authors.map(author => (
+        {book.authors && book.authors.map(author => (
           <div key={author}>{author}</div>
         ))}
 
-        <div className="book-shelf-changer">
+        <div>
           <select value={book.shelf} onChange={e => moveToShelf(book, e.target.value)}>
             <option value="none" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>

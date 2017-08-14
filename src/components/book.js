@@ -12,7 +12,7 @@ class BookComponent extends Component {
 
     return (
       <div>
-        <img src={book.imageLinks.thumbnail} alt="" />
+        <img src={book.imageLinks != null ? book.imageLinks.thumbnail : undefined} alt="" />
 
         <div>{book.title}</div>
 

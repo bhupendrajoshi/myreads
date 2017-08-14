@@ -20,6 +20,11 @@ class App extends Component {
       this.setState((previousState) => {
         let { currentlyReading, wantToRead, read } = res;
         let previousBooks = previousState.books;
+
+        if (previousBooks.find(prevBook => prevBook.id === book.id) === undefined) {
+          previousBooks.push(book);
+        }
+
         previousBooks.forEach(previousBook => {
           if (currentlyReading.find(bid => bid === previousBook.id) !== undefined) {
             previousBook.shelf = 'currentlyReading';

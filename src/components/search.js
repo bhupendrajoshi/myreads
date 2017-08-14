@@ -53,7 +53,19 @@ class SearchComponent extends Component {
 
     if (searchTermsToQuery && searchTermsToQuery.length > 0) {
       searchTermsToQuery.sort();
-      BooksAPI.search(searchTermsToQuery[0]).then(books => this.setState({ books: books }));
+      BooksAPI.search(searchTermsToQuery[0]).then(books => {
+        books.forEach(book => {
+          var bookAlreadyOnShelf = this.props.booksAlreadyOnShelf.find(b => b.id === book.id);
+          if (bookAlreadyOnShelf !== undefined) {
+            book.shelf = bookAlreadyOnShelf.shelf;
+          }
+          else {
+            book.shelf = "none";
+          }
+        })
+
+        this.setState({ books: books });
+      });
     }
   }
 
@@ -66,7 +78,7 @@ class SearchComponent extends Component {
           onChange={event => this.updateQuery(event.target.value)} />
 
         <ShelfComponent
-          title="Currently reading"
+          title=""
           books={this.state.books}
           moveToShelf={this.props.moveToShelf} />
       </div>

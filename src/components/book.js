@@ -11,16 +11,10 @@ class BookComponent extends Component {
     let { book, moveToShelf } = this.props;
 
     return (
-      <div>
-        <img src={book.imageLinks != null ? book.imageLinks.thumbnail : undefined} alt="" />
+      <div className="book-container">
+        <img className="book-cover" src={book.imageLinks != null ? book.imageLinks.thumbnail : undefined} alt="" />
 
-        <div>{book.title}</div>
-
-        {book.authors && book.authors.map(author => (
-          <div key={author}>{author}</div>
-        ))}
-
-        <div>
+        <div className="book-shelf">
           <select value={book.shelf} onChange={e => moveToShelf(book, e.target.value)}>
             <option value="none" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
@@ -28,6 +22,14 @@ class BookComponent extends Component {
             <option value="read">Read</option>
             <option value="none">None</option>
           </select>
+        </div>
+
+        <div className="book-title">{book.title}</div>
+
+        <div className="book-authors">
+          {book.authors && book.authors.map(author => (
+            <div key={author}>{author}</div>
+          ))}
         </div>
       </div>
     )

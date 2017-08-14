@@ -72,15 +72,24 @@ class SearchComponent extends Component {
   render() {
     return (
       <div>
-        <Link to="/">Back</Link>
-        <input type='text'
-          placeholder='Search books'
-          onChange={event => this.updateQuery(event.target.value)} />
+        <div className="search-books-bar">
+          <div className="close-search">
+            <Link to="/">Back</Link>
+          </div>
 
-        <ShelfComponent
-          title=""
-          books={this.state.books}
-          moveToShelf={this.props.moveToShelf} />
+          <div className="search-books-input-wrapper">
+            <input type='text'
+              placeholder='Search books'
+              onChange={event => this.updateQuery(event.target.value)} />
+          </div>
+        </div>
+
+        <div className="search-books-results">
+          <ShelfComponent
+            title=""
+            books={this.state.books}
+            moveToShelf={this.props.moveToShelf} />
+        </div>
       </div>
     );
   }

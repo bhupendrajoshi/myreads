@@ -1,4 +1,141 @@
 body {
   display: flex;
   font-family: sans-serif;
+  line-height: 1.5;
+}
+
+.title {
+  padding: 10px 0;
+  background: #2e7c31;
+  text-align: center;
+  font-weight: 400;
+  margin: 0;
+  color: white;
+}
+
+.shelf-title {
+  border-bottom: 1px solid #dedede;
+}
+
+.shelf-books {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.book {
+  align-self: auto;
+  flex-grow: 0;
+  order: 0;
+  padding: 0 10px 20px;
+}
+
+.book-container {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}
+
+.book-cover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background: #eee;
+  width: 130px;
+  height: 190px;
+  align-self: flex-start;
+}
+
+.book-title,
+.book-authors {
+  padding: 20px 10px 0;
+  font-size: 0.8em;
+}
+
+.book-title {
+  margin-top: 10px;
+}
+
+.book-authors {
+  color: #999;
+}
+
+.book-shelf {
+  align-self: flex-end;
+  margin-top: -40px;
+  margin-right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #60ac5d;
+  background-image: url('./icons/arrow-drop-down.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.book-shelf select {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.open-search {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+.open-search a {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2e7d32;
+  background-image: url('./icons/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 0;
+}
+
+.search-books-bar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
+}
+
+.close-search a {
+  display: block;
+  top: 20px;
+  left: 15px;
+  width: 50px;
+  height: 53px;
+  background: white;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+}
+
+.search-books-input-wrapper {
+  flex: 1;
+  background: #e9e;
+}
+
+.search-books-bar input {
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 1.25em;
+  border: none;
+  outline: none;
+}
+
+.search-books-results {
+  padding: 80px 10px 20px;
 }

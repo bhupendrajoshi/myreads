@@ -13,7 +13,7 @@ class LibraryComponent extends Component {
   render() {
     return (
       <div>
-        <header>MyReads</header>
+        <header className="title">My Reads</header>
 
         <ShelfComponent
           title="Currently reading"
@@ -28,7 +28,7 @@ class LibraryComponent extends Component {
           books={this.props.books.filter(book => book.shelf === 'read')}
           moveToShelf={this.props.moveToShelf} />
 
-        <div>
+        <div className="open-search">
           <Link to="/search">Add a book</Link>
         </div>
       </div>

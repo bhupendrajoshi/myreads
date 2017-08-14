@@ -14,11 +14,13 @@ class ShelfComponent extends Component {
 
     return (
       <div>
-        <h3>{title}</h3>
+        <h3 className="shelf-title">{title}</h3>
 
-        {books.map(book => (
-          <BookComponent key={book.id} book={book} moveToShelf={moveToShelf} />
-        ))}
+        <div className="shelf-books">
+          {books.map(book => (
+            <BookComponent className="book" key={book.id} book={book} moveToShelf={moveToShelf} />
+          ))}
+        </div>
       </div>
     )
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import * as BooksAPI from './BooksAPI';
+import { BrowserRouter, Route } from 'react-router-dom'
 
-import ShelfComponent from './components/shelf';
+import * as BooksAPI from './BooksAPI';
+import LibraryComponent from './components/library';
+import SearchComponent from './components/search';
 
 class App extends Component {
 
@@ -13,45 +15,48 @@ class App extends Component {
     BooksAPI.getAll().then(books => this.setState({ books: books }));
   }
 
-  moveToShelf(book, shelf) {
+  moveToShelf = (book, shelf) => {
     BooksAPI.update(book, shelf).then(res =>
-      this.setState((prevState) => {
+      this.setState((previousState) => {
         let { currentlyReading, wantToRead, read } = res;
-        let prevBooks = prevState.books;
-        prevBooks.forEach(prevBook => {
-          if (currentlyReading.find(bid => bid === prevBook.id) !== undefined) {
-            prevBook.shelf = 'currentlyReading';
+        let previousBooks = previousState.books;
+
+        if (previousBooks.find(prevBook => prevBook.id === book.id) === undefined) {
+          previousBooks.push(book);
+        }
+
+        previousBooks.forEach(previousBook => {
+          if (currentlyReading.find(bid => bid === previousBook.id) !== undefined) {
+            previousBook.shelf = 'currentlyReading';
           }
-          if (wantToRead.find(bid => bid === prevBook.id) !== undefined) {
-            prevBook.shelf = 'wantToRead';
+          if (wantToRead.find(bid => bid === previousBook.id) !== undefined) {
+            previousBook.shelf = 'wantToRead';
           }
-          if (read.find(bid => bid === prevBook.id) !== undefined) {
-            prevBook.shelf = 'read';
+          if (read.find(bid => bid === previousBook.id) !== undefined) {
+            previousBook.shelf = 'read';
           }
         });
-        return { books: prevBooks };
+        return { books: previousBooks };
       })
     );
   }
 
   render() {
     return (
-      <div>
-        <header>MyReads</header>
-
-        <ShelfComponent
-          title="Currently reading"
-          books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
-          moveToShelf={(book, shelf) => this.moveToShelf(book, shelf)} />
-        <ShelfComponent
-          title="Want to read"
-          books={this.state.books.filter(book => book.shelf === 'wantToRead')}
-          moveToShelf={(book, shelf) => this.moveToShelf(book, shelf)} />
-        <ShelfComponent
-          title="Read"
-          books={this.state.books.filter(book => book.shelf === 'read')}
-          moveToShelf={(book, shelf) => this.moveToShelf(book, shelf)} />
-      </div>
+      <BrowserRouter>
+        <div>
+          <Route exact path="/" render={() => (
+            <LibraryComponent
+              books={this.state.books}
+              moveToShelf={(book, shelf) => this.moveToShelf(book, shelf)} />
+          )} />
+          <Route exact path="/search" render={() => (
+            <SearchComponent
+              booksAlreadyOnShelf={this.state.books}
+              moveToShelf={(book, shelf) => this.moveToShelf(book, shelf)} />
+          )} />
+        </div>
+      </BrowserRouter>
     );
   }
 }

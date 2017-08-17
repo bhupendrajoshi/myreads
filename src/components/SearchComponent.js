@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import escapeRegExp from 'escape-string-regexp';
 
 import * as BooksAPI from '../BooksAPI';
-import ShelfComponent from './shelf';
+import ShelfComponent from './ShelfComponent';
 
 class SearchComponent extends Component {
 
@@ -66,6 +66,9 @@ class SearchComponent extends Component {
 
         this.setState({ books: books });
       });
+    }
+    else {
+      this.setState({ books: [] });
     }
   }
 

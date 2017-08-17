@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BookComponent from './book';
+import BookComponent from './BookComponent';
 import PropTypes from 'prop-types';
 
 class ShelfComponent extends Component {

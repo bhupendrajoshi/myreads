@@ -4,6 +4,11 @@ body {
   line-height: 1.5;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   padding: 10px 0;
   background: #2e7c31;

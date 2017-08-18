@@ -2,25 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import ShelfComponent from './ShelfComponent';
+import Shelf from './Shelf';
 
-const LibraryComponent = ({ books, moveToShelf }) => {
+const Library = ({ books, moveBookToShelf }) => {
   return (
-    <div>
+    <div className="app">
       <header className="title">My Reads</header>
 
-      <ShelfComponent
+      <Shelf
         title="Currently reading"
         books={books.filter(book => book.shelf === 'currentlyReading')}
-        moveToShelf={moveToShelf} />
-      <ShelfComponent
+        moveBookToShelf={moveBookToShelf} />
+      <Shelf
         title="Want to read"
         books={books.filter(book => book.shelf === 'wantToRead')}
-        moveToShelf={moveToShelf} />
-      <ShelfComponent
+        moveBookToShelf={moveBookToShelf} />
+      <Shelf
         title="Read"
         books={books.filter(book => book.shelf === 'read')}
-        moveToShelf={moveToShelf} />
+        moveBookToShelf={moveBookToShelf} />
 
       <div className="open-search">
         <Link to="/search">Add a book</Link>
@@ -29,9 +29,9 @@ const LibraryComponent = ({ books, moveToShelf }) => {
   );
 };
 
-LibraryComponent.propTypes = {
+Library.propTypes = {
   books: PropTypes.array.isRequired,
-  moveToShelf: PropTypes.func.isRequired
+  moveBookToShelf: PropTypes.func.isRequired
 };
 
-export default LibraryComponent;
+export default Library;
